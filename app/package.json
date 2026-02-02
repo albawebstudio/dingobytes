@@ -2,8 +2,8 @@
   "name": "nuxt-app",
   "private": true,
   "engines": {
-    "node": ">=24.11.1",
-    "npm": ">=11.6.2"
+    "node": ">=22.16.0",
+    "npm": ">=9.7.0"
   },
   "packageManager": "pnpm@9.7.0",
   "type": "module",
@@ -14,12 +14,10 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "dev:cloudflare": "pnpm dlx wrangler pages dev dist/",
     "generate": "nuxt generate",
     "start": "nuxt start",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "wrangler pages deploy dist/"
   },
   "dependencies": {
     "@nuxt/content": "^2.13.4",
