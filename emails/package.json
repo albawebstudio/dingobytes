@@ -1,0 +1,19 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "description": "Email templates for the DingoBytes project",
+  "main": "index.js",
+  "scripts": {
+    "email:build:contact": "mjml ./src/*.mjml -o ./dist",
+    "email:watch:contact": "mjml -w ./src/*.mjml -o ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/albawebstudio/dingobytes-nuxt.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "mjml": "^4.18.0"
+  },
+  "packageManager": "pnpm@9.7.0+sha256.b35018fbfa8f583668b2649e407922a721355cd81f61beeb4ac1d4258e585559"
+}

@@ -1,0 +1,14 @@
+html {
+    scroll-behavior: smooth;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-hind font-thin; /* Apply Hind font to the body */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-extrabold; /* Apply Montserrat font to all heading elements */
+}
