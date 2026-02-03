@@ -15,7 +15,7 @@ provider:
   name: aws
   profile: ${self:custom.profiles.${opt:stage, self:provider.stage, 'development'}}
   stage: ${opt:stage, 'development'}
-  runtime: nodejs24.x
+  runtime: nodejs22.x
   iam:
     role: arn:aws:iam::253548989411:role/dingobytes-api
 

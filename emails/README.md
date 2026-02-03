@@ -68,3 +68,11 @@ aws ses send-templated-email \
   --template "dingobytes-contact_production" \
   --template-data file://tests/ses/contact_form_development.json
 ```
+
+This can help with troubleshooting issues with the email template.
+
+```shell
+aws ses test-render-template \
+  --template-name dingobytes-contact_production \
+  --template-data file://tests/ses/contact_form_development.json
+```
