@@ -44,7 +44,7 @@ export default defineNuxtConfig({
         apiUrl: process.env.API_URL,
         public: {
             siteUrl: process.env.SITE_URL ?? 'https://dingobytes.com',
-            honeypotThreshold: process.env.HONEYPOT_THRESHOLD ?? 5,
+            honeypotThreshold: process.env.HONEYPOT_THRESHOLD ?? "5",
         }
     },
     security: {
