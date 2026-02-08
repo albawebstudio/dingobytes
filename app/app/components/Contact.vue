@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
-import { useContactData } from "~/composables/useContactData"
-import { useSiteData } from "~/composables/useSiteData"
-import { differenceInSeconds } from "date-fns"
+import {shallowRef} from 'vue'
+import {useContactData} from "~/composables/useContactData"
+import {useSiteData} from "~/composables/useSiteData"
+import {differenceInSeconds} from "date-fns"
 import ContactForm from "~/components/common/ContactForm.vue"
 import Spinner from "~/components/common/Spinner.vue"
 import Success from "~/components/common/Success.vue"
+import type {ContactFormResponse} from "~/models/types/contact-form-response";
+import useApi from "~/composables/useApi";
 
-const { site } = useSiteData()
-const { contact } = useContactData()
-
-const honeypotThreshold = parseInt(useRuntimeConfig().public.honeypotThreshold, 10)
+const {site} = useSiteData()
+const {contact} = useContactData()
+const runtimeConfig = useRuntimeConfig()
+const honeypotThreshold = runtimeConfig.public.honeypotThreshold
 
 interface FormData {
   name: string,
@@ -43,7 +45,7 @@ const resetForm = () => {
 const isFormValid = computed(() => {
   return form.value.name.trim() &&
       (form.value.email.trim() ||
-      form.value.phone.trim()) &&
+          form.value.phone.trim()) &&
       form.value.message.trim()
 })
 
@@ -54,19 +56,19 @@ const submitForm = async () => {
     showSpinner.value = false
     return
   }
-  try{
+  try {
     const formData = form.value
     const submissionDT = new Date()
-    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > honeypotThreshold
+    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > parseInt(honeypotThreshold, 10)
 
     if (formData.mobile === '' && isOutsideThreshold) {
-      const { mobile, form_time, ...contactForm } = formData
-      const response: object = await $fetch('/api/contact-form', {
+      const {mobile, form_time, ...contactForm} = formData
+      const contactFormResponse = await useApi<ContactFormResponse>('/api/contact-form', {
         method: 'POST',
         body: contactForm,
       })
 
-      if (!response.success) {
+      if (!contactFormResponse.success) {
         throw new Error('Failed to submit form')
       }
     }
@@ -80,7 +82,7 @@ const submitForm = async () => {
 }
 const clearSuccess = () => {
   resetForm()
-  showSuccess.value=false
+  showSuccess.value = false
 }
 </script>
 
@@ -103,7 +105,7 @@ const clearSuccess = () => {
 
         <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
 
-          <Spinner v-if="showSpinner" />
+          <Spinner v-if="showSpinner"/>
 
           <ContactForm
               v-if="showForm"
@@ -116,7 +118,7 @@ const clearSuccess = () => {
           />
 
           <Success @updateClearSuccess="clearSuccess"
-                   v-if="showSuccess" />
+                   v-if="showSuccess"/>
         </div>
       </div>
     </div>
