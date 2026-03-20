@@ -83,7 +83,7 @@ const submitForm = () => {
     </div>
 
     <div class="form__alt" aria-hidden="true">
-      <label for="mobile">Mobil</label>
+      <label for="mobile">Mobile</label>
       <input
           :value="mobile ?? ''"
           @input="updateMobile"

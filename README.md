@@ -10,11 +10,14 @@ DingoBytes represents the first domain name that was purchased by Alba Web Studi
 
 [Neon Silver Sky](https://coolors.co/palette/ff6600-ebebeb-c0c0c0-3a88d1-004e98)
 
-- Blaze Orange [#ff6600]
-- Platinum [#ebebeb]
-- Silver [#c0c0c0]
-- Bright Ocean [#3a88d1]
-- Steel Azure [#004e98]
+| Color Name    | Preview                                                                   |
+|---------------|---------------------------------------------------------------------------|
+| Blaze Orange  | ![#ff6600](https://img.shields.io/badge/-ff6600-ff6600?style=flat-square) |
+| Platinum      | ![#ebebeb](https://img.shields.io/badge/-ebebeb-ebebeb?style=flat-square) |
+| Silver        | ![#c0c0c0](https://img.shields.io/badge/-c0c0c0-c0c0c0?style=flat-square) |
+| Bright Ocean  | ![#3a88d1](https://img.shields.io/badge/-3a88d1-3a88d1?style=flat-square) |
+| Steel Azure   | ![#004e98](https://img.shields.io/badge/-004e98-004e98?style=flat-square) |
+
 
 ### Photos
 
