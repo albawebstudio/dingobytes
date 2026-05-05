@@ -5,28 +5,15 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: {enabled: true},
     css: ['~/assets/css/main.css'],
-    postcss: {
-        plugins: {
-            tailwindcss: {},
-            autoprefixer: {},
-        },
-    },
+
     modules: [
         '@nuxt/content',
+        '@nuxt/image',
+        '@nuxt/ui',
         'nuxt-security',
         'nuxt-svgo',
-        ['@nuxtjs/google-fonts', {
-            families: {
-                Montserrat: {
-                    wght: '800'
-                },
-                Hind: {
-                    wght: '300..700',
-                    ital: '300..700',
-                }
-            }
-        }],
     ],
+
     nitro: {
         prerender: {
             routes: ['/sitemap.xml']
@@ -41,10 +28,13 @@ export default defineNuxtConfig({
         defaultImport: 'component',
     },
     runtimeConfig: {
-        apiUrl: process.env.API_URL,
+        contactName: process.env.CONTACT_NAME,
+        contactEmail: process.env.CONTACT_EMAIL,
+        toEmail: process.env.TO_EMAIL,
+        resendApiKey: process.env.RESEND_API_KEY,
+        resendTemplateId: process.env.RESEND_TEMPLATE_ID,
         public: {
             siteUrl: process.env.SITE_URL ?? 'https://dingobytes.com',
-            honeypotThreshold: process.env.HONEYPOT_THRESHOLD ?? "5",
         }
     },
     security: {
@@ -65,29 +55,5 @@ export default defineNuxtConfig({
                 ],
             }
         },
-    },
-    content: {
-        // Point at content/ from cwd (run from app dir). Needed after Nuxt 4 codemod when rootDir/baseDir resolution is wrong.
-        sources: {
-            content: {
-                driver: 'fs',
-                base: resolve(process.cwd(), 'content'),
-            },
-        },
-        navigation: {
-            fields: ['title', 'description', 'last_updated_at', 'backgroundImage', 'quotes'],
-        },
-        markdown: {
-            toc: {
-                depth: 3,
-                searchDepth: 3
-            },
-            rehypePlugins: [
-                'rehype-external-links'
-            ]
-        }
-    },
-    future: {
-        compatibilityVersion: 4,
     },
 })
