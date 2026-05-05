@@ -11,8 +11,6 @@ import useApi from "~/composables/useApi";
 
 const {site} = useSiteData()
 const {contact} = useContactData()
-const runtimeConfig = useRuntimeConfig()
-const honeypotThreshold = runtimeConfig.public.honeypotThreshold
 
 interface FormData {
   name: string,
@@ -59,11 +57,11 @@ const submitForm = async () => {
   try {
     const formData = form.value
     const submissionDT = new Date()
-    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > parseInt(honeypotThreshold, 10)
+    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > 5
 
     if (formData.mobile === '' && isOutsideThreshold) {
       const {mobile, form_time, ...contactForm} = formData
-      const contactFormResponse = await useApi<ContactFormResponse>('/api/contact-form', {
+      const contactFormResponse = await useApi<ContactFormResponse>('/api/send', {
         method: 'POST',
         body: contactForm,
       })
