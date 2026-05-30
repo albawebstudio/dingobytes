@@ -4,7 +4,7 @@ interface Props {
   email: string
   phone: string
   mobile: string
-  message: string
+  messageBody: string
 }
 
 defineProps<Props>();
@@ -13,7 +13,7 @@ const emit = defineEmits<{
   (e: 'update:email', value: string): void
   (e: 'update:phone', value: string): void
   (e: 'update:mobile', value: string): void
-  (e: 'update:message', value: string): void
+  (e: 'update:messageBody', value: string): void
   (e: 'submit'): void
 }>()
 
@@ -33,8 +33,8 @@ const updateMobile = (event: Event) => {
   emit('update:mobile', (event.target as HTMLInputElement).value)
 }
 
-const updateMessage = (event: Event) => {
-  emit('update:message', (event.target as HTMLTextAreaElement).value)
+const updatemessageBody = (event: Event) => {
+  emit('update:messageBody', (event.target as HTMLTextAreaElement).value)
 }
 
 const submitForm = () => {
@@ -101,16 +101,16 @@ const submitForm = () => {
     </div>
 
     <div>
-      <label class="sr-only" for="message">Message</label>
+      <label class="sr-only" for="messageBody">Message</label>
 
       <textarea
-          :value="message"
-          @input="updateMessage"
+          :value="messageBody"
+          @input="updatemessageBody"
           class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
-          placeholder="Message"
+          placeholder="messageBody"
           rows="8"
-          name="message"
-          id="message"
+          name="messageBody"
+          id="messageBody"
       ></textarea>
     </div>
 
