@@ -109,6 +109,7 @@ const submitForm = () => {
           class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
           placeholder="Message"
           rows="8"
+          name="message"
           id="message"
       ></textarea>
     </div>
