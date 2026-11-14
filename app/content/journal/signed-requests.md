@@ -31,13 +31,20 @@ To keep your data safe, signed requests rely on three core concepts:
 
 Instead of sending your secret key over the internet (which is like leaving your palace keys in the door lock), you use the key to perform a "digital handshake."
 
-| Step | Persona | Action |
-| :--- | :--- | :--- |
-| **1. The Bundle** | **Sender** | Grab your data (e.g., `{ "id": 123 }`) and the current time. |
-| **2. The Math** | **Sender** | Run that bundle through an **HMAC algorithm** using your Secret Key. This spits out a long string of gibberish called the **Signature**. |
-| **3. The Send** | **Network** | Ship the data, the timestamp, and the signature to the server. |
-| **4. The Test** | **Receiver** | The server takes your data and performs the **exact same math** using its copy of the Secret Key. |
-| **5. The Match** | **Receiver** | If the server’s calculated gibberish matches *your* gibberish, we’re in business! |
+### 1. The Bundle (`Sender`)
+Grab your data (e.g., `{ "id": 123 }`) and the current time.
+
+### 2. The Math (`Sender`)
+Run that bundle through an **HMAC algorithm** using your Secret Key. This spits out a long string of gibberish called the **Signature**.
+
+### 3. The Send (`Network`)
+Ship the data, the timestamp, and the signature to the server.
+
+### 4. The Test (`Receiver`)
+The server takes your data and performs the **exact same math** using its copy of the Secret Key.
+
+### 5. The Match (`Receiver`)
+If the server’s calculated gibberish matches *your* gibberish, we’re in business!
 
 ### Why not just use a regular API Key?
 

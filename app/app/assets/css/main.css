@@ -1,9 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:ital,wght@1,800&display=swap');
+@import "tailwindcss";
+@import "@nuxt/ui";
+
 html {
     scroll-behavior: smooth;
 }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-hind: 'Hind', serif;
+
+    --color-primary: var(--color-blaze-orange);
+    --color-primary-50: var(--color-blaze-orange-50);
+    --color-primary-100: var(--color-blaze-orange-100);
+    --color-primary-200: var(--color-blaze-orange-200);
+    --color-primary-300: var(--color-blaze-orange-300);
+    --color-primary-400: var(--color-blaze-orange-400);
+    --color-primary-500: var(--color-blaze-orange-500);
+    --color-primary-600: var(--color-blaze-orange-600);
+    --color-primary-700: var(--color-blaze-orange-700);
+    --color-primary-800: var(--color-blaze-orange-800);
+    --color-primary-900: var(--color-blaze-orange-900);
+
+    --color-secondary: var(--color-steel-azure);
+    --color-secondary-50: var(--color-steel-azure-50);
+    --color-secondary-100: var(--color-steel-azure-100);
+    --color-secondary-200: var(--color-steel-azure-200);
+    --color-secondary-300: var(--color-steel-azure-300);
+    --color-secondary-400: var(--color-steel-azure-400);
+    --color-secondary-500: var(--color-steel-azure-500);
+    --color-secondary-600: var(--color-steel-azure-600);
+    --color-secondary-700: var(--color-steel-azure-700);
+    --color-secondary-800: var(--color-steel-azure-800);
+    --color-secondary-900: var(--color-steel-azure-900);
+
+    --color-light: var(--color-bright-ocean);
+    --color-light-50: var(--color-bright-ocean-50);
+    --color-light-100: var(--color-bright-ocean-100);
+    --color-light-200: var(--color-bright-ocean-200);
+    --color-light-300: var(--color-bright-ocean-300);
+    --color-light-400: var(--color-bright-ocean-400);
+    --color-light-500: var(--color-bright-ocean-500);
+    --color-light-600: var(--color-bright-ocean-600);
+    --color-light-700: var(--color-bright-ocean-700);
+    --color-light-800: var(--color-bright-ocean-800);
+    --color-light-900: var(--color-bright-ocean-900);
+
+    --color-blaze-orange: #FF6600;
+    --color-blaze-orange-50: #FFD4B8;
+    --color-blaze-orange-100: #FFC8A3;
+    --color-blaze-orange-200: #FFAF7A;
+    --color-blaze-orange-300: #FF9752;
+    --color-blaze-orange-400: #FF7E29;
+    --color-blaze-orange-500: #FF6600;
+    --color-blaze-orange-600: #C75000;
+    --color-blaze-orange-700: #8F3900;
+    --color-blaze-orange-800: #572300;
+    --color-blaze-orange-900: #1F0C00;
+    --color-blaze-orange-950: #030100;
+
+    --color-platinum: #EBEBEB;
+    --color-platinum-50: #FFFFFF;
+    --color-platinum-100: #FFFFFF;
+    --color-platinum-200: #FFFFFF;
+    --color-platinum-300: #FFFFFF;
+    --color-platinum-400: #FFFFFF;
+    --color-platinum-500: #EBEBEB;
+    --color-platinum-600: #CFCFCF;
+    --color-platinum-700: #B3B3B3;
+    --color-platinum-800: #979797;
+    --color-platinum-900: #7B7B7B;
+    --color-platinum-950: #6D6D6D;
+
+    --color-silver: #C0C0C0;
+    --color-silver-50: #FFFFFF;
+    --color-silver-100: #FFFFFF;
+    --color-silver-200: #FDFDFD;
+    --color-silver-300: #E9E9E9;
+    --color-silver-400: #D4D4D4;
+    --color-silver-500: #C0C0C0;
+    --color-silver-600: #A4A4A4;
+    --color-silver-700: #888888;
+    --color-silver-800: #6C6C6C;
+    --color-silver-900: #505050;
+    --color-silver-950: #424242;
+
+    --color-bright-ocean: #3A88D1;
+    --color-bright-ocean-50: #CFE2F4;
+    --color-bright-ocean-100: #BED8F0;
+    --color-bright-ocean-200: #9DC4E8;
+    --color-bright-ocean-300: #7CB0E0;
+    --color-bright-ocean-400: #5B9CD9;
+    --color-bright-ocean-500: #3A88D1;
+    --color-bright-ocean-600: #286CAB;
+    --color-bright-ocean-700: #1D4F7D;
+    --color-bright-ocean-800: #133250;
+    --color-bright-ocean-900: #081623;
+    --color-bright-ocean-950: #03070C;
+
+    --color-steel-azure: #004E98;
+    --color-steel-azure-50: #51AAFF;
+    --color-steel-azure-100: #3CA0FF;
+    --color-steel-azure-200: #138CFF;
+    --color-steel-azure-300: #0078EA;
+    --color-steel-azure-400: #0063C1;
+    --color-steel-azure-500: #004E98;
+    --color-steel-azure-600: #003160;
+    --color-steel-azure-700: #001428;
+    --color-steel-azure-800: #000000;
+    --color-steel-azure-900: #000000;
+    --color-steel-azure-950: #000000;
+}
 
 body {
     @apply font-hind font-thin; /* Apply Hind font to the body */

@@ -11,8 +11,6 @@ import useApi from "~/composables/useApi";
 
 const {site} = useSiteData()
 const {contact} = useContactData()
-const runtimeConfig = useRuntimeConfig()
-const honeypotThreshold = runtimeConfig.public.honeypotThreshold
 
 interface FormData {
   name: string,
@@ -20,7 +18,7 @@ interface FormData {
   phone: string,
   mobile: string,
   form_time: Date | string,
-  message: string,
+  messageBody: string,
 }
 
 const showSpinner = shallowRef(false)
@@ -33,7 +31,7 @@ const getInitialFormData = (): FormData => ({
   phone: "",
   mobile: "",
   form_time: new Date(),
-  message: "",
+  messageBody: "",
 })
 
 const form = ref<FormData>(getInitialFormData())
@@ -46,7 +44,7 @@ const isFormValid = computed(() => {
   return form.value.name.trim() &&
       (form.value.email.trim() ||
           form.value.phone.trim()) &&
-      form.value.message.trim()
+      form.value.messageBody.trim()
 })
 
 const submitForm = async () => {
@@ -59,11 +57,11 @@ const submitForm = async () => {
   try {
     const formData = form.value
     const submissionDT = new Date()
-    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > parseInt(honeypotThreshold, 10)
+    const isOutsideThreshold = differenceInSeconds(submissionDT, formData.form_time) > 5
 
     if (formData.mobile === '' && isOutsideThreshold) {
       const {mobile, form_time, ...contactForm} = formData
-      const contactFormResponse = await useApi<ContactFormResponse>('/api/contact-form', {
+      const contactFormResponse = await useApi<ContactFormResponse>('/api/send', {
         method: 'POST',
         body: contactForm,
       })
@@ -113,7 +111,7 @@ const clearSuccess = () => {
               v-model:email.trim="form.email"
               v-model:phone.trim="form.phone"
               v-model:mobile.trim="form.mobile"
-              v-model:message.trim="form.message"
+              v-model:messageBody.trim="form.messageBody"
               @submit="submitForm"
           />
 

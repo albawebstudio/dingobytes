@@ -1,0 +1,12 @@
+name = "dingobytes"
+compatibility_date = "2025-07-15"
+pages_build_output_dir = "dist"
+
+[vars]
+SITE_URL = "https://dingobytes.com"
+
+
+[[d1_databases]]
+binding = "dingobytes_content_db"
+database_name = "dingobytes-content-db"
+database_id = "6acbedd9-3700-496e-8f62-10853c2da5c5"
