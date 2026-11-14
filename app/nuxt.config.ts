@@ -1,5 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { resolve } from 'node:path'
+import { readdirSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const rootDir = dirname(fileURLToPath(import.meta.url))
+
+/** Markdown-driven routes that must be prerendered for @nuxt/content on Cloudflare Pages. */
+function markdownPrerenderRoutes(...sections: string[]) {
+    return sections.flatMap((section) => {
+        try {
+            return readdirSync(join(rootDir, 'content', section))
+                .filter((file) => file.endsWith('.md'))
+                .map((file) => `/${section}/${file.replace(/\.md$/, '')}`)
+        } catch {
+            return []
+        }
+    })
+}
+
+const contentPrerenderRoutes = [
+    '/journal',
+    ...markdownPrerenderRoutes('journal', 'legal'),
+]
 
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
@@ -16,7 +38,7 @@ export default defineNuxtConfig({
 
     nitro: {
         prerender: {
-            routes: ['/sitemap.xml']
+            routes: ['/sitemap.xml', ...contentPrerenderRoutes],
         },
         preset: "cloudflare_pages",
         cloudflare: {

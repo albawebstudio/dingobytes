@@ -22,11 +22,16 @@ useHead({
 <template>
   <section v-if="data" id="article-privacy" class="bg-white dark:bg-gray-900 w-full pb-24 mb-0">
     <div class="w-full pb-40 pt-20 bg-secondary px-4 sm:px-40 bg-local bg-no-repeat bg-center" :style="data.backgroundImage ? 'background-image: url(' + data.backgroundImage + ')' : ''">
-      <h1 class="text-6xl font-bold text-center text-gray-700 dark:text-white mb-4">{{ data.title }}</h1>
-      <p class="text-center text-gray-500 dark:text-gray-300 italic">{{ pubDate(data.last_updated_at) }}</p>
+      <h1 class="mb-4 text-center text-6xl font-bold text-gray-700 text-shadow-sm text-shadow-white/50 dark:text-white dark:text-shadow-sm dark:text-shadow-secondary/40">
+        {{ data.title }}
+      </h1>
+      <p class="text-center text-gray-600 text-shadow-xs text-shadow-white/35 dark:text-gray-300 dark:text-shadow-gray/25 italic">{{ pubDate(data.last_updated_at) }}</p>
     </div>
     <div class="bg-white w-full sm:max-w-7xl dark:bg-gray-800 text-gray-700 dark:text-gray-100 rounded-3xl flex flex-col items-center shadow-md -mt-20 mx-auto p-10 gap-10">
-      <ContentDoc :value="data" class="prose prose-sm sm:prose-base dark:prose-invert max-w-none" />
+      <ContentDoc
+        :value="data"
+        class="prose prose-sm dark:prose-invert w-full min-w-0 max-w-none break-words sm:prose-base"
+      />
     </div>
   </section>
   <section v-else class="bg-white dark:bg-gray-900 w-full min-h-screen flex items-center justify-center">
@@ -35,6 +40,22 @@ useHead({
 </template>
 
 <style>
+.prose {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose img,
+.prose video,
+.prose iframe {
+  max-width: 100%;
+}
+
 .prose :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   quotes: none;
   font-weight: 200;

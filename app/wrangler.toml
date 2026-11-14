@@ -2,12 +2,7 @@ name = "dingobytes"
 compatibility_date = "2025-07-15"
 pages_build_output_dir = "dist"
 
-# Environment-specific variables
-[env.preview]
-SITE_URL = "https://dingobytes.com"
-
-
-[env.production]
+[vars]
 SITE_URL = "https://dingobytes.com"
 
 
