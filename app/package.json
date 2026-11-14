@@ -12,9 +12,9 @@
     "url": "https://github.com/albawebstudio/dingobytes.git#app"
   },
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxi build",
     "dev": "nuxt dev --dotenv .env.local",
-    "wrangler:dev": "nuxt build --dotenv .env.local && wrangler pages dev dist",
+    "wrangler:dev": "nuxi build --dotenv .env.local && wrangler pages dev dist",
     "generate": "nuxt generate",
     "start": "nuxt start",
     "preview": "nuxt preview",

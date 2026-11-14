@@ -5,9 +5,6 @@
 html {
     scroll-behavior: smooth;
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @theme {
     --font-montserrat: 'Montserrat', sans-serif;
@@ -121,4 +118,78 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     @apply font-montserrat font-extrabold; /* Apply Montserrat font to all heading elements */
+}
+
+/* @nuxt/content + Shiki: Tailwind Typography forces `pre code { color: inherit }` and hides tokens. */
+.prose :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: unset;
+    background-color: transparent;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.prose :where(pre code .line):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    display: block;
+    min-height: 1.25rem;
+}
+
+.prose h3, .prose h4, .prose pre {
+    margin-top: calc(var(--spacing) * 4);
+}
+
+/* Lists: plain <ul>/<ol> from MDC lack Nuxt UI ProseUl classes; preflight strips markers. */
+.prose :where(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply list-disc ps-6 my-5;
+}
+
+.prose :where(ol):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply list-decimal ps-6 my-5;
+}
+
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply my-1.5 ps-1.5 leading-7;
+}
+
+.prose :where(ul > li, ol > li):not(:where([class~="not-prose"], [class~="not-prose"] *))::marker {
+    color: var(--color-secondary-500);
+}
+.prose :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    quotes: none;
+    font-weight: 200;
+}
+blockquote {
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+}
+
+blockquote:before {
+    content:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%23777777'><path d='M9.983 3v7.391C9.983 16.095 6.252 19.961 1 21l-.995-2.151C2.437 17.932 4 15.211 4 13H0V3h9.983zM24 3v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151C16.437 17.932 18 15.211 18 13h-3.983V3H24z'/></svg>");
+    left: 0;
+}
+
+blockquote:after {
+    content: " ";
+    left: 5px;
+    top: 25px;
+    width: 1px;
+    height: 100%;
+}
+
+blockquote p.cite {
+    display: block;
+    font-size: 1.25rem;
+    text-align: right;
+    margin: 10px 0 0;
+}
+
+html.dark .prose :where(pre.shiki, pre.shiki span):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+}
+
+html:not(.dark) .prose :where(pre.shiki, pre.shiki span):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
 }
