@@ -1,27 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { readdirSync } from 'node:fs'
-import { join, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-const rootDir = dirname(fileURLToPath(import.meta.url))
-
-/** Markdown-driven routes that must be prerendered for @nuxt/content on Cloudflare Pages. */
-function markdownPrerenderRoutes(...sections: string[]) {
-    return sections.flatMap((section) => {
-        try {
-            return readdirSync(join(rootDir, 'content', section))
-                .filter((file) => file.endsWith('.md'))
-                .map((file) => `/${section}/${file.replace(/\.md$/, '')}`)
-        } catch {
-            return []
-        }
-    })
-}
-
-const contentPrerenderRoutes = [
-    '/journal',
-    ...markdownPrerenderRoutes('journal', 'legal'),
-]
+import { contentPrerenderRoutes } from './content-prerender-routes'
 
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
@@ -36,18 +14,43 @@ export default defineNuxtConfig({
         'nuxt-svgo',
     ],
 
+    routeRules: {
+        '/': { prerender: true },
+        '/journal': { prerender: true },
+        '/journal/**': { prerender: true },
+        '/legal/**': { prerender: true },
+        '/sitemap.xml': { prerender: true },
+    },
     nitro: {
         prerender: {
             routes: ['/sitemap.xml', ...contentPrerenderRoutes],
+            crawlLinks: false,
         },
-        preset: "cloudflare_pages",
+        preset: 'cloudflare_pages',
         cloudflare: {
             deployConfig: true,
-            nodeCompat: true
-        }
+            nodeCompat: true,
+        },
     },
     svgo: {
         defaultImport: 'component',
+    },
+    content: {
+        highlight: {
+            theme: {
+                default: 'github-light',
+                dark: 'github-dark',
+            },
+            themes: ['github-light', 'github-dark'],
+            langs: ['javascript', 'js', 'typescript', 'ts', 'vue', 'json', 'bash', 'markdown', 'md', 'yaml'],
+        },
+        markdown: {
+            tags: {
+                ul: 'ProseUl',
+                ol: 'ProseOl',
+                li: 'ProseLi',
+            },
+        },
     },
     runtimeConfig: {
         contactName: process.env.CONTACT_NAME,
