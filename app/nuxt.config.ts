@@ -20,10 +20,12 @@ export default defineNuxtConfig({
         '/journal/**': { prerender: true },
         '/legal/**': { prerender: true },
         '/sitemap.xml': { prerender: true },
+        '/.well-known/security.txt': { prerender: true },
+        '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
     },
     nitro: {
         prerender: {
-            routes: ['/sitemap.xml', ...contentPrerenderRoutes],
+            routes: ['/.well-known/security.txt', '/sitemap.xml', ...contentPrerenderRoutes],
             crawlLinks: false,
         },
         preset: 'cloudflare_pages',
@@ -58,6 +60,8 @@ export default defineNuxtConfig({
         toEmail: process.env.TO_EMAIL,
         resendApiKey: process.env.RESEND_API_KEY,
         resendTemplateId: process.env.RESEND_TEMPLATE_ID,
+        securityTxtContact: process.env.SECURITY_TXT_CONTACT ?? 'mailto:security@dingobytes.com',
+        securityTxtPolicyUrl: process.env.SECURITY_TXT_POLICY_URL,
         public: {
             siteUrl: process.env.SITE_URL ?? 'https://dingobytes.com',
         }
